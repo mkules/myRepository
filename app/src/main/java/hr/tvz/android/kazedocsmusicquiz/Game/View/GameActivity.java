@@ -64,7 +64,7 @@ public class GameActivity extends AppCompatActivity implements MediaPlayer.OnPre
         mp=new MediaPlayer();
         mp.setAudioAttributes(new AudioAttributes.Builder().setLegacyStreamType(AudioManager.STREAM_MUSIC).build());
         baza=Room.databaseBuilder(this,AppDatabase.class,"songs").allowMainThreadQueries().build();
-        if(baza!=null)baza.songDao().insertAll();
+        if(baza.songDao().getAllByYear(1970).get(0)==null)baza.songDao().insertAll();
         timer = findViewById(R.id.timer);
         listaPjesama=baza.songDao().getAllByYear(category_year);
         listaNazivaPjesama=baza.songDao().getAllNames();
