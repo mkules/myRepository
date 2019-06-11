@@ -64,7 +64,7 @@ public class GameActivity extends AppCompatActivity implements MediaPlayer.OnPre
         mp=new MediaPlayer();
         mp.setAudioAttributes(new AudioAttributes.Builder().setLegacyStreamType(AudioManager.STREAM_MUSIC).build());
         baza=Room.databaseBuilder(this,AppDatabase.class,"songs").allowMainThreadQueries().build();
-        if(baza.songDao().getAllByYear(1970).get(0)==null)baza.songDao().insertAll();
+        if(baza.songDao().getAllByYear(1970).size()==0)baza.songDao().insertAll(Song.populateData());
         timer = findViewById(R.id.timer);
         listaPjesama=baza.songDao().getAllByYear(category_year);
         listaNazivaPjesama=baza.songDao().getAllNames();
@@ -199,7 +199,7 @@ public class GameActivity extends AppCompatActivity implements MediaPlayer.OnPre
         int repeat=Points.getInstance().getRepeat();
 
         Intent intent;
-       if(flag)
+      /* if(flag)
         {
             intent = new Intent(this, BonusRoundActivity.class);
 
@@ -209,7 +209,7 @@ public class GameActivity extends AppCompatActivity implements MediaPlayer.OnPre
             finish();
         }
         else {
-
+*/
             if (repeat < 4) {
                 intent = new Intent(this, GameActivity.class);
 
@@ -222,7 +222,7 @@ public class GameActivity extends AppCompatActivity implements MediaPlayer.OnPre
             }
             startActivity(intent);
             finish();
-       }
+    //   }
     }
 
     @Override
