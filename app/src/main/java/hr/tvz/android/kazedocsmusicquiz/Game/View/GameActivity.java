@@ -199,17 +199,17 @@ public class GameActivity extends AppCompatActivity implements MediaPlayer.OnPre
         int repeat=Points.getInstance().getRepeat();
 
         Intent intent;
-      /* if(flag)
+        if(flag)
         {
             intent = new Intent(this, BonusRoundActivity.class);
 
             intent.putExtra("year", category_year);
-            intent.putExtra("artist", listaPjesama.get(0).getArtist());
+            intent.putExtra("artist", song.getArtist());
             startActivity(intent);
             finish();
         }
         else {
-*/
+
             if (repeat < 4) {
                 intent = new Intent(this, GameActivity.class);
 
@@ -222,7 +222,7 @@ public class GameActivity extends AppCompatActivity implements MediaPlayer.OnPre
             }
             startActivity(intent);
             finish();
-    //   }
+       }
     }
 
     @Override
