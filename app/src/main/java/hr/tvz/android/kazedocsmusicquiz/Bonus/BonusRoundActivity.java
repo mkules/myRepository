@@ -21,6 +21,7 @@ public class BonusRoundActivity extends AppCompatActivity implements View.OnClic
     private Button button;
     private String artist;
     private int category_year;
+    private int tryCounter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class BonusRoundActivity extends AppCompatActivity implements View.OnClic
         artist = getIntent().getStringExtra("artist");
         artist = artist.replaceAll("[^a-zA-Z]", "");
         editText = findViewById(R.id.unos);
-
+        if (tryCounter==3) zavrsi();
 
 
     }
@@ -63,12 +64,24 @@ public class BonusRoundActivity extends AppCompatActivity implements View.OnClic
                 Points.getInstance().setBodovi(bodovi + noviBodovi);
                 bodovi = Points.getInstance().getBodovi();
                 Points.getInstance().setTitle("Bodovi: " + bodovi);
+                zavrsi();
             }
-            else   Toast.makeText(this, "WRONG", Toast.LENGTH_SHORT).show();
-            
-            int repeat = Points.getInstance().getRepeat();
+            else
+            {
+                if(tryCounter==2)Toast.makeText(this, "WRONG", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(this, "WRONG, TRY AGAIN", Toast.LENGTH_SHORT).show();
+                tryCounter++;
+            }
 
+
+            if (tryCounter==3) zavrsi();
+        }
+        }
+
+        public void zavrsi()
+        {
             Intent intent;
+            int repeat = Points.getInstance().getRepeat();
             if (repeat < 4) {
                 intent = new Intent(this, GameActivity.class);
 
@@ -81,6 +94,5 @@ public class BonusRoundActivity extends AppCompatActivity implements View.OnClic
             }
             startActivity(intent);
             finish();
-        }
         }
 }
